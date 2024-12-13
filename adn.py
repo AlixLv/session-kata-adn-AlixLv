@@ -66,7 +66,7 @@ conversion_table = {
 'TGG':'W',
 }
 
-sample = [['TACCT', 'CCGAG', 'CTGGT', 'TCGCG', 'TATGA']]
+sample = [['TACCT', 'CCGAG', 'CTGGT', 'TCGCG', 'TATGA'], ['TACCT', 'CCGAG', 'CTGGT', 'TCGCG', 'TATGA'], ['AAGGC', 'ACACA', 'TTCAG', 'ACCTG', 'GCTAA'], ['CACAT', 'CCTCT', 'ACGAA', 'CCTGG', 'CCAGT'], ['TTTTA', 'TAGAC', 'AGTAC', 'CTGAG', 'CGTGG']]
 
 def main():
     list_data = readFile()
@@ -81,7 +81,7 @@ def main():
     five_groups_list = breakFiveNucleotides(twenty_five_groups_list)
     print(five_groups_list)
     #displayComplexFile(five_groups_list)
-    calculateRecurrences(sample)
+    calculateRecurrences(five_groups_list)
   
 
 def readFile():
@@ -125,27 +125,24 @@ def breakFiveNucleotides(text):
 def calculateRecurrences(list):
     index_in_list = 0
     index_in_group = 0
+    list_of_nucleotides = ["T", "C", "A", "G"]
     
-    for i in range(5):
-        for element in list:
+                
+    for i in list_of_nucleotides:
+        print(f"🔥 current letter: {i} ")  
+        for sublist in list:
             counter = [0, 0, 0, 0, 0]
-            current_letter = element[index_in_list][index_in_group]
-            #print(f"🐳 {current_letter}")
-            
-            for group in element:
-                #print()
-                #print(f"🥑 {group}")
-            
-                for index, value in enumerate(group): 
-                    #print(f"index: {index}, value: {value}")
-                    if current_letter == value:
-                        counter[index] += 1
-            index_in_group += 1
-            index_in_list += 1
-            print(f"🦆 {current_letter}: {counter}")
+            print(f"🌼 current sublist: {sublist}")   
+            for group in sublist:
+                #print(group)       
+                for index, value in enumerate(group):
+                    #print(index, " : ", value)
+                    if i == value:
+                        counter[index] +=1
+            print(f"🌸 {i}, {counter}")    
+                    
 
                        
-        
-    
+            
 main()
 
