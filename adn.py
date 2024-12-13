@@ -66,7 +66,13 @@ conversion_table = {
 'TGG':'W',
 }
 
-sample = [['TACCT', 'CCGAG', 'CTGGT', 'TCGCG', 'TATGA'], ['TACCT', 'CCGAG', 'CTGGT', 'TCGCG', 'TATGA'], ['AAGGC', 'ACACA', 'TTCAG', 'ACCTG', 'GCTAA'], ['CACAT', 'CCTCT', 'ACGAA', 'CCTGG', 'CCAGT'], ['TTTTA', 'TAGAC', 'AGTAC', 'CTGAG', 'CGTGG']]
+sample = {
+     "T": [1, 0, 0, 2, 2],
+     "C": [2, 3, 2, 1, 0],
+     "A": [2, 1, 2, 1, 2],
+     "G": [0, 1, 1, 1, 1]
+}
+
 
 def main():
     list_data = readFile()
@@ -82,6 +88,7 @@ def main():
     print(five_groups_list)
     #displayComplexFile(five_groups_list)
     calculateRecurrences(five_groups_list)
+   
   
 
 def readFile():
@@ -123,13 +130,11 @@ def breakFiveNucleotides(text):
     return lst    
 
 def calculateRecurrences(list):
-    index_in_list = 0
-    index_in_group = 0
     list_of_nucleotides = ["T", "C", "A", "G"]
-    
                 
     for sublist in list:
         print(f"🌼 current sublist: {sublist}")  
+        dico = {}
         for i in list_of_nucleotides:
             counter = [0, 0, 0, 0, 0]
             #print(f"🔥 current letter: {i} ") 
@@ -139,10 +144,40 @@ def calculateRecurrences(list):
                     #print(index, " : ", value)
                     if i == value:
                         counter[index] +=1
-            print(f"🌸 {i}, {counter}")    
+            print(f"🌸 {i}, {counter}")  
+            dico[i] = counter
+        print(f"🪻 {dico}")
+        reccurences = getOrderBySublist(sample)
         print()        
 
-                       
+
+def getOrderBySublist(dico):
+    winner_list = []
+    
+    #on prend la vue de toutes les listes et de leurs valeurs; on les transforme en une grande liste; on prend la longueur de la 1re liste et on itère dessus:
+    for i in range(len(list(dico.values())[0])):
+        #print(f"🥝 index: {i}")
+        higher_value = 0
+        winners = []
+        
+        #on itère à l'index i sur chaque liste:
+        for key, value in dico.items():
+            current_value = value[i]
+            #print(f"🌼 {value[i]}")
+            
+            if current_value > higher_value:
+                higher_value = current_value
+                winners = [key]
+            elif current_value == higher_value:
+                winners.append(key)
+        #print(f"🍅 winners: {winners}")  
+        
+        winner_list.append(winners)
+    
+    print(f"🌈 winner list : {winner_list}") 
+    return winner_list            
+        
+                                
             
 main()
 
