@@ -128,11 +128,11 @@ def calculateRecurrences(list):
     list_of_nucleotides = ["T", "C", "A", "G"]
     
                 
-    for i in list_of_nucleotides:
-        print(f"🔥 current letter: {i} ")  
-        for sublist in list:
+    for sublist in list:
+        print(f"🌼 current sublist: {sublist}")  
+        for i in list_of_nucleotides:
             counter = [0, 0, 0, 0, 0]
-            print(f"🌼 current sublist: {sublist}")   
+            #print(f"🔥 current letter: {i} ") 
             for group in sublist:
                 #print(group)       
                 for index, value in enumerate(group):
@@ -140,7 +140,7 @@ def calculateRecurrences(list):
                     if i == value:
                         counter[index] +=1
             print(f"🌸 {i}, {counter}")    
-                    
+        print()        
 
                        
             
