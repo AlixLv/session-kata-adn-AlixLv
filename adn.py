@@ -70,17 +70,18 @@ sample = [['TACCT', 'CCGAG', 'CTGGT', 'TCGCG', 'TATGA']]
 
 def main():
     list_data = readFile()
-    three_groups_list = breakThreeNucleotides(list_data)
-    print(three_groups_list)
-    displayFile(three_groups_list)
-    converting(three_groups_list, conversion_table)
+    # three_groups_list = breakThreeNucleotides(list_data)
+    # print(three_groups_list)
+    # displayFile(three_groups_list)
+    # converting(three_groups_list, conversion_table)
     
-    # twenty_five_groups_list = breakTwentyFiveNucleotides(list_data)
-    # print(twenty_five_groups_list)
-    # displayFile(twenty_five_groups_list)
-    # five_groups_list = breakFiveNucleotides(twenty_five_groups_list)
-    # displayComplexFile(five_groups_list)
-    # calculateRecurrences(sample)
+    twenty_five_groups_list = breakTwentyFiveNucleotides(list_data)
+    #print(twenty_five_groups_list)
+    #displayFile(twenty_five_groups_list)
+    five_groups_list = breakFiveNucleotides(twenty_five_groups_list)
+    print(five_groups_list)
+    #displayComplexFile(five_groups_list)
+    calculateRecurrences(sample)
   
 
 def readFile():
@@ -122,23 +123,29 @@ def breakFiveNucleotides(text):
     return lst    
 
 def calculateRecurrences(list):
-    for element in list:
-        
-        for group in element:
-            print(f"🥑 {group}")
+    index_in_list = 0
+    index_in_group = 0
+    
+    for i in range(5):
+        for element in list:
             counter = [0, 0, 0, 0, 0]
-            index = 0
+            current_letter = element[index_in_list][index_in_group]
+            #print(f"🐳 {current_letter}")
             
-            for letters in group:
-                if letters == group[index]:
-                    #print(f"🌶️ {letters}")
-                    #print(f"🐙 {group[index]}")
-                    counter[index] += 1
-        index +=1
-        print(f"🦁 {counter}")    
+            for group in element:
+                #print()
+                #print(f"🥑 {group}")
             
+                for index, value in enumerate(group): 
+                    #print(f"index: {index}, value: {value}")
+                    if current_letter == value:
+                        counter[index] += 1
+            index_in_group += 1
+            index_in_list += 1
+            print(f"🦆 {current_letter}: {counter}")
 
-
+                       
+        
     
 main()
 
